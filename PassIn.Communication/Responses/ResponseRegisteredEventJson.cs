@@ -2,6 +2,6 @@
 {
     public class ResponseRegisteredEventJson
     {
-        public Guid Id { get; set; }
+        public decimal Id { get; set; }
     }
 }
