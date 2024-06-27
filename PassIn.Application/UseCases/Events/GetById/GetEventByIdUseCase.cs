@@ -6,23 +6,27 @@ namespace PassIn.Application.UseCases.Events.GetById
 {
     public class GetEventByIdUseCase
     {
-        public  ResponseEventJson Execute(decimal id)
+        private readonly PassInDbContext _dbContext;
+        public GetEventByIdUseCase()
         {
-            var dbContext = new PassInDbContext();
+            _dbContext = new PassInDbContext();
+        }
 
-            var evento = dbContext.Events.Find(id);
+        public ResponseEventJson Execute(decimal id)
+        {
+            var entity = _dbContext.Events.Find(id);
 
-            if (evento == null)
+            if (entity == null)
             {
                 throw new NotFoundException("An event with this Id don't exist.");
             }
 
             return new ResponseEventJson
             {
-                Id = evento.Id,
-                Title = evento.Title,
-                Details = evento.Details,
-                MaxAttendees = evento.Maximum_Attendees,
+                Id = entity.Id,
+                Title = entity.Title,
+                Details = entity.Details,
+                MaxAttendees = entity.Maximum_Attendees,
                 AttendeesAmount = -1
             };
         }

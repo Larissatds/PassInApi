@@ -1,7 +1,12 @@
-﻿namespace PassIn.Infrastructure.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace PassIn.Infrastructure.Entities
 {
     public class Attendee
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public decimal Id { get; set; }
 
         public string Name { get; set; } = string.Empty;
@@ -12,6 +17,6 @@
 
         public DateTime Created_At { get; set; }
 
-        public CheckIn? CheckIns { get; set; }
+        //public CheckIn? CheckIns { get; set; }
     }
 }
