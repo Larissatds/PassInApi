@@ -9,6 +9,7 @@ namespace PassIn.Infrastructure
 
         public DbSet<Attendee> Attendees { get; set; }
 
+        public DbSet<CheckIn> CheckIns { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -1,4 +1,6 @@
-﻿using PassIn.Communication.Responses;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using PassIn.Communication.Responses;
 using PassIn.Exceptions;
 using PassIn.Infrastructure;
 
@@ -14,7 +16,7 @@ namespace PassIn.Application.UseCases.Events.GetById
 
         public ResponseEventJson Execute(decimal id)
         {
-            var entity = _dbContext.Events.Find(id);
+            var entity = _dbContext.Events.Include(e => e.Attendees).FirstOrDefault(e => e.Id == id);
 
             if (entity == null)
             {
@@ -27,7 +29,7 @@ namespace PassIn.Application.UseCases.Events.GetById
                 Title = entity.Title,
                 Details = entity.Details,
                 MaxAttendees = entity.Maximum_Attendees,
-                AttendeesAmount = -1
+                AttendeesAmount = entity.Attendees.Count()
             };
         }
     }

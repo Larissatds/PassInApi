@@ -17,6 +17,6 @@ namespace PassIn.Infrastructure.Entities
 
         public DateTime Created_At { get; set; }
 
-        //public CheckIn? CheckIns { get; set; }
+        public CheckIn? CheckIn { get; set; }
     }
 }

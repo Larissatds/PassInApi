@@ -17,7 +17,7 @@ namespace PassIn.Infrastructure.Entities
 
         public int Maximum_Attendees { get; set; }
 
-        //[ForeignKey("Event_Id")]
-        //public List<Attendee> Attendees { get; set; }
+        [ForeignKey("Event_Id")]
+        public List<Attendee> Attendees { get; set; } = new List<Attendee>();
     }
 }

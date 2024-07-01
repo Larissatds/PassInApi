@@ -1,11 +1,8 @@
-﻿using Azure;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PassIn.Application.UseCases.Events.GetById;
 using PassIn.Application.UseCases.Events.Register;
-using PassIn.Application.UseCases.Events.RegisterAttendee;
 using PassIn.Communication.Requests;
 using PassIn.Communication.Responses;
-using PassIn.Exceptions;
 
 namespace PassIn.Api.Controllers
 {
@@ -36,20 +33,6 @@ namespace PassIn.Api.Controllers
             var response = useCase.Execute(id);
 
             return Ok(response);
-        }
-
-        [HttpPost]
-        [Route("{id}/register")]
-        [ProducesResponseType(typeof(ResponseRegisteredJson), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        public IActionResult Register([FromRoute] decimal id, [FromBody] ResponseRegisterEventJson request)
-        {
-            var useCase = new RegisterAttendeeOnEventUseCase();
-
-            var response = useCase.Execute(id, request);
-
-            return Created(string.Empty, response);
         }
     }
 }
